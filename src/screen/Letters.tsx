@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useTheme } from "../context/ThemeContext";
 import { motion, AnimatePresence } from "framer-motion";
+import { Mail, MailOpen } from "lucide-react"; // Import message icons
 
 // Types
 interface Letter {
@@ -26,8 +27,31 @@ const Letter: React.FC<{ letter: Letter }> = ({ letter }) => {
           : "bg-white text-gray-800"
       } p-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 border ${
         theme === "dark" ? "border-gray-700" : "border-gray-200"
-      }`}
+      } relative`}
     >
+      {/* Message icon that changes based on open state */}
+      <div className="absolute -top-3 -left-3">
+        {isOpen ? (
+          <MailOpen
+            size={24}
+            className={`p-1 rounded-full ${
+              theme === "dark"
+                ? "text-purple-400 bg-gray-900"
+                : "text-purple-600 bg-white"
+            } shadow-md`}
+          />
+        ) : (
+          <Mail
+            size={24}
+            className={`p-1 rounded-full ${
+              theme === "dark"
+                ? "text-blue-400 bg-gray-900"
+                : "text-blue-600 bg-white"
+            } shadow-md`}
+          />
+        )}
+      </div>
+
       <button
         className="flex items-center justify-between w-full text-left focus:outline-none focus:ring-2 focus:ring-blue-500 rounded"
         onClick={() => setIsOpen(!isOpen)}
@@ -84,32 +108,34 @@ const Letters: React.FC = () => {
   const letters: Letter[] = [
     {
       id: 1,
-      title: "Coming Soon...",
-      content: "Loading...",
-      emoji: "",
+      title: "Miss you",
+      content: "អូនហ៎ា🥺🤭 នឹកអូនពេកហៅអូនលេង🤭 អូនមិនអីទេមែន🥺🤍",
+      emoji: "💌",
     },
-    {
-      id: 2,
-      title: "Coming Soon...",
-      content: "Loading...",
-      emoji: "",
-    },
+    // {
+    //   id: 2,
+    //   title: "Special Note",
+    //   content:
+    //     "Here's something special just for you. Hope it makes you smile!",
+    //   emoji: "✨",
+    // },
     {
       id: 3,
-      title: "Coming Soon...",
-      content: "Loading...",
-      emoji: "",
+      title: "Memories",
+      content:
+        "ចាំទេថ្ងៃដែរយើងទាក់ទងគ្នាដំបូង? បងសប្បាយចិត្តហ៎ាអោយតែបាននៅក្បែអូនម្ដងៗ😚 ទេាះជាពេលនុះយើងមិនទាន់ត្រូវជាអីនឹងគ្នាក៏ដោយ🥺🤍",
+      emoji: "📝",
     },
-    {
-      id: 4,
-      title: "Coming Soon...",
-      content: "Loading....",
-      emoji: "",
-    },
+    // {
+    //   id: 4,
+    //   title: "Future Plans",
+    //   content: "Let's make more wonderful memories together!",
+    //   emoji: "🔮",
+    // },
   ];
 
   return (
-    <Section title="Open When...">
+    <Section title="Messages">
       <div className="max-w-4xl mx-auto">
         <div
           className={`grid grid-cols-1 md:grid-cols-2 gap-6 ${
@@ -120,7 +146,7 @@ const Letters: React.FC = () => {
             letters.map((letter) => <Letter key={letter.id} letter={letter} />)
           ) : (
             <p className="text-center col-span-full text-gray-500">
-              No letters available.
+              No messages available.
             </p>
           )}
         </div>

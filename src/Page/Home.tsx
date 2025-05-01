@@ -4,6 +4,7 @@ import { useTheme } from "../context/ThemeContext";
 import HeroSection from "../screen/HeroSection";
 import Letters from "../screen/Letters";
 import BestMoment from "../screen/BestMoment";
+import HiddenLoveNote from "../screen/HiddenLoveNote";
 
 interface CountdownResult {
   days: number;
@@ -56,51 +57,6 @@ const useAnniversaryCountdown = (): CountdownResult => {
   return timeLeft;
 };
 
-// Hidden Love Note Component
-const HiddenLoveNote: React.FC = () => {
-  const [isVisible, setIsVisible] = useState<boolean>(false);
-  const [hasBeenRevealed, setHasBeenRevealed] = useState<boolean>(false);
-
-  const handleReveal = () => {
-    setIsVisible(!isVisible);
-    if (!hasBeenRevealed && !isVisible) {
-      setHasBeenRevealed(true);
-    }
-  };
-
-  return (
-    <div className="text-center">
-      <button
-        onClick={handleReveal}
-        className={`px-6 py-3 rounded-full transition-all duration-300 ${
-          isVisible
-            ? "bg-pink-600 hover:bg-pink-700"
-            : "bg-pink-500 hover:bg-pink-600"
-        } text-white shadow-md hover:shadow-lg transform hover:-translate-y-1`}
-      >
-        {isVisible ? "Hide Love Note" : "Reveal Love Note"}
-      </button>
-
-      <div
-        className={`mt-6 transition-all duration-500 ${
-          isVisible
-            ? "opacity-100 max-h-96"
-            : "opacity-0 max-h-0 overflow-hidden"
-        }`}
-      >
-        <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg border-2 border-pink-300 dark:border-pink-800">
-          <p className="text-gray-700 dark:text-gray-300 text-lg">
-            អរគុណណាដែរចូលមកក្នុងជីវិត្តខ្ញុំ{""}
-            អរគុណណាដែរអ្នកមើលថែខ្ញុំបានល្អដល់ថ្នាក់នេះមានតែអ្នកទេដែរយល់ពីខ្ញុំជាងគេ។{" "}
-            <br /> អូនជិតដល់ពេលដែរត្រូវចេញហើយមើលថែខ្លួនណា អូនរស្មី <br />{" "}
-            បងស្រឡាញ់អូន🤍
-          </p>
-        </div>
-      </div>
-    </div>
-  );
-};
-
 // Section Component for consistent styling
 const Section: React.FC<{
   title: string;
@@ -147,7 +103,7 @@ const Home: React.FC = () => {
         </section>
 
         {/* Anniversary Countdown */}
-        <Section data-aos="fade-down" title="Anniversary Countdown">
+        <Section title="Anniversary Countdown">
           <div className="flex justify-center">
             <div
               className={`p-6 rounded-lg shadow-lg text-center max-w-md w-full ${
