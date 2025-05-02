@@ -33,10 +33,10 @@ const memories: Memory[] = [
     tags: ["holiday"],
   },
   {
-    id: "memory2",
+    id: "memory3",
     date: "2025-05-01",
     title: "At a cafe",
-    description: "A nice holiday with you at a cafe.",
+    description: "A nice holiday with you at a coffee shop near out school.",
     image: ThirtDate,
     tags: ["holiday"],
   },

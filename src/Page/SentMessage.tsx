@@ -39,22 +39,21 @@ const SentMessages: React.FC = () => {
     let isValid = true;
     const newErrors = { recipient: "", message: "" };
 
+    // Remove character limit for recipient
     if (!formData.recipient.trim()) {
       newErrors.recipient = "Recipient name is required";
       isValid = false;
-    } else if (!/^[a-zA-Z\s'-]{2,50}$/.test(formData.recipient)) {
+    } else if (!/^[a-zA-Z\s'-]+$/.test(formData.recipient)) {
       newErrors.recipient =
-        "Name should be 2-50 characters (letters, spaces, hyphens, or apostrophes)";
+        "Name should contain only letters, spaces, hyphens, or apostrophes";
       isValid = false;
     }
 
+    // Remove character limit for message
     if (!formData.message.trim()) {
       newErrors.message = "Message is required";
       isValid = false;
-    } else if (formData.message.length > 5000) {
-      newErrors.message = "Message must be 160 characters or less";
-      isValid = false;
-    }
+    } // Remove length limit check for message
 
     setErrors(newErrors);
     return isValid;

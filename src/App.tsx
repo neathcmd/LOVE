@@ -5,6 +5,7 @@ import Footer from "./components/Footer";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import { useEffect } from "react";
+import "./style/App.css";
 
 const App: React.FC = () => {
   useEffect(() => {

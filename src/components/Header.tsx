@@ -39,6 +39,7 @@ const Header: React.FC<HeaderProps> = ({
       alt: "White heart",
     },
   ];
+
   // Default navigation items if none are provided
   const defaultNavItems: NavigationItem[] = [
     {
@@ -136,14 +137,24 @@ const Header: React.FC<HeaderProps> = ({
       theme === "dark"
         ? "text-gray-300 hover:text-indigo-400 hover:bg-gray-800/50"
         : "text-gray-700 hover:text-indigo-600 hover:bg-gray-100",
+    mobileMenuBg:
+      theme === "dark"
+        ? "bg-gray-800 border-gray-700"
+        : "bg-white border-gray-200",
   };
 
   // Custom focus ring style
   const focusRingClass =
     "focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2";
-  if (theme === "dark") {
-    focusRingClass.replace("focus:ring-offset-2", "focus:ring-offset-gray-900");
-  }
+
+  // Modified focus ring for dark mode
+  const darkModeFocusRing =
+    theme === "dark"
+      ? focusRingClass.replace(
+          "focus:ring-offset-2",
+          "focus:ring-offset-gray-900"
+        )
+      : focusRingClass;
 
   return (
     <header
@@ -191,7 +202,7 @@ const Header: React.FC<HeaderProps> = ({
                     active
                       ? `${themeClasses.link.active} transform scale-105`
                       : themeClasses.link.inactive
-                  } ${focusRingClass}`}
+                  } ${darkModeFocusRing}`}
                   aria-current={active ? "page" : undefined}
                 >
                   <span className="transition-transform duration-300 group-hover:rotate-12">
@@ -209,11 +220,11 @@ const Header: React.FC<HeaderProps> = ({
           </div>
 
           {/* Mobile menu button */}
-          <div className="md:hidden flex items-center gap-2 z-100 ">
+          <div className="md:hidden flex items-center gap-2">
             {showThemeToggle && <ThemeToggle />}
             <button
               onClick={toggleMenu}
-              className={`inline-flex items-center justify-center p-2 rounded-md ${focusRingClass} transition-colors duration-300 ${themeClasses.mobileMenuButton}`}
+              className={`inline-flex items-center justify-center p-2 rounded-md ${darkModeFocusRing} transition-colors duration-300 ${themeClasses.mobileMenuButton}`}
               aria-expanded={isMenuOpen}
               aria-controls="mobile-menu"
               aria-label="Toggle navigation menu"
@@ -247,22 +258,17 @@ const Header: React.FC<HeaderProps> = ({
         />
       )}
 
-      {/* Mobile menu with slide-in animation from right */}
+      {/* Mobile dropdown menu with slide-down animation */}
       <div
         id="mobile-menu"
-        className={`fixed top-0 right-0 h-full w-64 z-40 backdrop-blur-sm pt-16 transition-transform duration-300 ease-in-out ${
-          isMenuOpen ? "translate-x-0" : "translate-x-full"
-        } shadow-lg ${theme === "dark" ? "bg-gray-800" : "bg-white"}`}
+        className={`md:hidden absolute left-0 right-0 z-40 shadow-lg overflow-hidden transition-all duration-300 ease-in-out ${
+          themeClasses.mobileMenuBg
+        } border-t ${
+          isMenuOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
+        }`}
         aria-hidden={!isMenuOpen}
       >
-        <nav
-          className={`px-4 pt-2 pb-4 space-y-2 ${
-            theme === "dark"
-              ? "bg-gray-800 text-white"
-              : "bg-white text-gray-900"
-          }`}
-          aria-label="Mobile navigation"
-        >
+        <nav className="px-4 py-3 space-y-1" aria-label="Mobile navigation">
           {navigationItems
             .filter((item) => !item.hideOnMobile)
             .map((item, index) => {
@@ -271,15 +277,15 @@ const Header: React.FC<HeaderProps> = ({
                 <Link
                   key={index}
                   to={item.link}
-                  className={`flex items-center gap-3 px-4 py-3 rounded-lg text-base font-medium transition-all duration-300 transform ${
+                  className={`flex items-center gap-3 px-4 py-3 rounded-lg text-base font-medium transition-all duration-300 ${
                     active
                       ? themeClasses.link.active
                       : themeClasses.link.inactive
-                  } ${
+                  } ${darkModeFocusRing} ${
                     isMenuOpen
-                      ? "opacity-100 translate-y-0"
-                      : "opacity-0 translate-y-8"
-                  } ${focusRingClass}`}
+                      ? "translate-y-0 opacity-100"
+                      : "-translate-y-2 opacity-0"
+                  }`}
                   aria-current={active ? "page" : undefined}
                   style={{
                     transitionDelay: isMenuOpen ? `${index * 75}ms` : "0ms",

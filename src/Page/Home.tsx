@@ -63,10 +63,24 @@ const Section: React.FC<{
   children: React.ReactNode;
   className?: string;
 }> = ({ title, children, className = "" }) => {
+  const { theme } = useTheme();
+
   return (
-    <section className={`mb-16 ${className}`}>
-      <h2 className="text-2xl md:text-3xl font-semibold mb-8 text-center">
-        {title}
+    <section className={`py-12 ${className}`}>
+      <h2
+        className={`
+        text-2xl md:text-3xl 
+        font-bold 
+        mb-10 
+        text-center 
+        relative 
+        inline-block 
+        mx-auto 
+        w-full
+        ${theme === "dark" ? "text-white" : "text-gray-800"}
+      `}
+      >
+        <span className="relative z-10">{title}</span>
       </h2>
       {children}
     </section>
@@ -86,19 +100,27 @@ const Home: React.FC = () => {
     setIsPageLoaded(true);
   }, []);
 
+  // Determine theme-based styles
+  const bgColor = theme === "dark" ? "bg-gray-900" : "bg-gray-50";
+  const textColor = theme === "dark" ? "text-gray-100" : "text-gray-800";
+  const cardBg = theme === "dark" ? "bg-gray-800" : "bg-white";
+  const cardShadow =
+    theme === "dark"
+      ? "shadow-lg shadow-pink-900/10"
+      : "shadow-xl shadow-pink-100/50";
+  const counterBg = theme === "dark" ? "bg-pink-900/30" : "bg-pink-50";
+  const counterText = theme === "dark" ? "text-pink-300" : "text-pink-600";
+  const secondaryText = theme === "dark" ? "text-gray-300" : "text-gray-600";
+
   return (
     <div
-      className={`min-h-screen text-gray-800 transition-colors duration-300 ${
+      className={`${bgColor} ${textColor} min-h-screen transition-all duration-500 ease-in-out ${
         isPageLoaded ? "opacity-100" : "opacity-0"
-      } ${
-        theme === "dark"
-          ? "bg-gray-900 text-white"
-          : "bg-gray-100 text-gray-900"
-      } transition-opacity duration-500`}
+      }`}
     >
-      <div className="container mx-auto px-4 py-12">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 pb-16">
         {/* HeroSection */}
-        <section className="text-center mb-16">
+        <section className="text-center mb-16 mt-6">
           <HeroSection />
         </section>
 
@@ -106,90 +128,65 @@ const Home: React.FC = () => {
         <Section title="Anniversary Countdown">
           <div className="flex justify-center">
             <div
-              className={`p-6 rounded-lg shadow-lg text-center max-w-md w-full ${
-                theme === "dark" ? "bg-gray-800" : "bg-white"
-              }`}
+              className={`
+                ${cardBg} 
+                ${cardShadow} 
+                p-8 
+                rounded-2xl 
+                text-center 
+                max-w-lg 
+                w-full
+                border
+                ${theme === "dark" ? "border-gray-700" : "border-gray-100"}
+              `}
             >
-              <p
-                className={`text-lg md:text-xl mb-4 ${
-                  theme === "dark" ? "text-white" : "text-gray-600"
-                }`}
-              >
+              <p className={`text-lg md:text-xl mb-6 ${secondaryText}`}>
                 Until our next anniversary:
               </p>
-              <div
-                className={`flex justify-center space-x-4 ${
-                  theme === "dark" ? "text-pink-600" : "text-gray-600"
-                }`}
-              >
-                <div
-                  className={`p-3 rounded-lg w-24 ${
-                    theme === "dark" ? "bg-pink-900/30" : "bg-pink-50"
-                  }`}
-                >
-                  <div className="text-3xl font-bold">{days}</div>
+              <div className="flex flex-wrap justify-center gap-4">
+                {[
+                  { value: days, label: "Days" },
+                  { value: hours, label: "Hours" },
+                  { value: minutes, label: "Minutes" },
+                  { value: seconds, label: "Seconds" },
+                ].map((item, index) => (
                   <div
-                    className={`text-sm ${
-                      theme === "dark" ? "text-gray-400" : "text-gray-600"
-                    }`}
+                    key={index}
+                    className={`
+                      ${counterBg} 
+                      p-4 
+                      rounded-xl 
+                      w-24 
+                      flex 
+                      flex-col 
+                      justify-center 
+                      items-center
+                      transform 
+                      transition-transform 
+                      duration-300 
+                      hover:scale-105
+                    `}
                   >
-                    Days
+                    <div className={`text-3xl font-bold ${counterText}`}>
+                      {item.value}
+                    </div>
+                    <div className={`text-sm font-medium ${secondaryText}`}>
+                      {item.label}
+                    </div>
                   </div>
-                </div>
-                <div
-                  className={`p-3 rounded-lg w-24 ${
-                    theme === "dark" ? "bg-pink-900/30" : "bg-pink-50"
-                  }`}
-                >
-                  <div className="text-3xl font-bold">{hours}</div>
-                  <div
-                    className={`text-sm ${
-                      theme === "dark" ? "text-gray-400" : "text-gray-600"
-                    }`}
-                  >
-                    Hours
-                  </div>
-                </div>
-                <div
-                  className={`p-3 rounded-lg w-24 ${
-                    theme === "dark" ? "bg-pink-900/30" : "bg-pink-50"
-                  }`}
-                >
-                  <div className="text-3xl font-bold">{minutes}</div>
-                  <div
-                    className={`text-sm ${
-                      theme === "dark" ? "text-gray-400" : "text-gray-600"
-                    }`}
-                  >
-                    Minutes
-                  </div>
-                </div>
-                <div
-                  className={`p-3 rounded-lg w-24 ${
-                    theme === "dark" ? "bg-pink-900/30" : "bg-pink-50"
-                  }`}
-                >
-                  <div className="text-3xl font-bold">{seconds}</div>
-                  <div
-                    className={`text-sm ${
-                      theme === "dark" ? "text-gray-400" : "text-gray-600"
-                    }`}
-                  >
-                    seconds
-                  </div>
-                </div>
+                ))}
               </div>
               <p
-                className={`mt-4 ${
-                  theme === "dark" ? "text-white" : "text-gray-600"
-                }`}
+                className={`mt-6 ${secondaryText} flex items-center justify-center gap-2`}
               >
-                <span className="text-pink-600">❤️</span>{" "}
-                {new Date(ANNIVERSARY_DATE).toLocaleDateString("en-US", {
-                  month: "long",
-                  day: "numeric",
-                  year: "numeric",
-                })}
+                <span className="text-pink-600 text-xl">❤️</span>
+                <span>
+                  {new Date(ANNIVERSARY_DATE).toLocaleDateString("en-US", {
+                    month: "long",
+                    day: "numeric",
+                    year: "numeric",
+                  })}
+                </span>
               </p>
             </div>
           </div>
@@ -197,7 +194,7 @@ const Home: React.FC = () => {
 
         {/* Memories Timeline */}
         <Section title="Our Memories">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {memories.map((memory) => (
               <MemoryCard key={memory.id} memory={memory} />
             ))}
@@ -206,16 +203,26 @@ const Home: React.FC = () => {
 
         {/* Hidden Love Note */}
         <Section title="A Special Message">
-          <HiddenLoveNote />
+          <div className="max-w-3xl mx-auto">
+            <HiddenLoveNote />
+          </div>
         </Section>
 
         {/* Open When Letters */}
-        <Letters />
+        <Section title="Love Letters">
+          <div className="max-w-4xl mx-auto">
+            <Letters />
+          </div>
+        </Section>
 
         {/* Best Moment */}
-        <Section title="Best Moment">
+        <Section title="Best Moment" className="mb-16">
           <div className="flex justify-center">
-            <BestMoment />
+            <div
+              className={`max-w-3xl w-full ${cardBg} ${cardShadow} rounded-2xl p-6`}
+            >
+              <BestMoment />
+            </div>
           </div>
         </Section>
       </div>

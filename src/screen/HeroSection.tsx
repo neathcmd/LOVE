@@ -1,6 +1,4 @@
 import React, { useState, useEffect, useCallback, useRef } from "react";
-import AOS from "aos";
-import "aos/dist/aos.css";
 import { useTheme } from "../context/ThemeContext";
 import SendMessageButton from "../components/Button/SendMessageButton";
 import Image1 from "../assets/Dynamic-Image/Image1.jpg";
@@ -40,82 +38,76 @@ const HeroSection: React.FC<HeroSectionProps> = ({
   const imageRef = useRef<HTMLImageElement>(null);
   const { theme } = useTheme();
 
-  const startInterval = useCallback(() => {
+  // Carousel navigation
+  const startSlideshow = useCallback(() => {
     intervalRef.current = setInterval(() => {
       setIsTransitioning(true);
       setTimeout(() => {
-        setCurrentImageIndex((prevIndex) => (prevIndex + 1) % images.length);
-        setTimeout(() => {
-          setIsTransitioning(false);
-        }, 50);
-      }, 650);
+        setCurrentImageIndex((prev) => (prev + 1) % images.length);
+        setIsTransitioning(false);
+      }, 300);
     }, 4000);
   }, []);
 
-  const clearIntervalRef = useCallback(() => {
+  const stopSlideshow = useCallback(() => {
     if (intervalRef.current) {
       clearInterval(intervalRef.current);
       intervalRef.current = null;
     }
   }, []);
 
-  const goToNext = useCallback(() => {
-    clearIntervalRef();
+  const goToNextImage = useCallback(() => {
+    stopSlideshow();
     setIsTransitioning(true);
     setTimeout(() => {
-      setCurrentImageIndex((prevIndex) => (prevIndex + 1) % images.length);
-      setTimeout(() => {
-        setIsTransitioning(false);
-        if (!isPaused) startInterval();
-      }, 50);
-    }, 650);
-  }, [clearIntervalRef, isPaused, startInterval]);
+      setCurrentImageIndex((prev) => (prev + 1) % images.length);
+      setIsTransitioning(false);
+      if (!isPaused) startSlideshow();
+    }, 300);
+  }, [isPaused, startSlideshow, stopSlideshow]);
 
-  const goToPrevious = useCallback(() => {
-    clearIntervalRef();
+  const goToPreviousImage = useCallback(() => {
+    stopSlideshow();
     setIsTransitioning(true);
     setTimeout(() => {
-      setCurrentImageIndex((prevIndex) =>
-        prevIndex === 0 ? images.length - 1 : prevIndex - 1
+      setCurrentImageIndex((prev) =>
+        prev === 0 ? images.length - 1 : prev - 1
       );
-      setTimeout(() => {
-        setIsTransitioning(false);
-        if (!isPaused) startInterval();
-      }, 50);
-    }, 650);
-  }, [clearIntervalRef, isPaused, startInterval]);
+      setIsTransitioning(false);
+      if (!isPaused) startSlideshow();
+    }, 300);
+  }, [isPaused, startSlideshow, stopSlideshow]);
 
-  const goToImage = useCallback(
+  const goToSpecificImage = useCallback(
     (index: number) => {
-      clearIntervalRef();
+      stopSlideshow();
       setIsTransitioning(true);
       setTimeout(() => {
         setCurrentImageIndex(index);
-        setTimeout(() => {
-          setIsTransitioning(false);
-          if (!isPaused) startInterval();
-        }, 50);
-      }, 650);
+        setIsTransitioning(false);
+        if (!isPaused) startSlideshow();
+      }, 300);
     },
-    [clearIntervalRef, isPaused, startInterval]
+    [isPaused, startSlideshow, stopSlideshow]
   );
 
-  const handleKeyDown = useCallback(
+  const handleKeyNavigation = useCallback(
     (event: React.KeyboardEvent) => {
-      if (event.key === "ArrowRight") goToNext();
-      if (event.key === "ArrowLeft") goToPrevious();
+      if (event.key === "ArrowRight") goToNextImage();
+      if (event.key === "ArrowLeft") goToPreviousImage();
     },
-    [goToNext, goToPrevious]
+    [goToNextImage, goToPreviousImage]
   );
 
-  const openModal = useCallback(() => {
+  // Modal and zoom controls
+  const openImageModal = useCallback(() => {
     setIsPaused(true);
     setIsModalOpen(true);
     setZoomLevel(1);
     setPosition({ x: 0, y: 0 });
   }, []);
 
-  const closeModal = useCallback(() => {
+  const closeImageModal = useCallback(() => {
     setIsModalOpen(false);
     setIsPaused(false);
     setZoomLevel(1);
@@ -123,23 +115,20 @@ const HeroSection: React.FC<HeroSectionProps> = ({
     setIsDragging(false);
   }, []);
 
-  const handleZoom = useCallback((delta: number) => {
-    setZoomLevel((prev) => {
-      const newZoom = Math.min(Math.max(prev + delta, 1), 4);
-      return newZoom;
-    });
+  const handleZoomChange = useCallback((newZoom: number) => {
+    setZoomLevel(Math.min(Math.max(newZoom, 1), 4));
   }, []);
 
-  const handleWheel = useCallback(
+  const handleWheelZoom = useCallback(
     (e: React.WheelEvent) => {
       e.preventDefault();
       const delta = e.deltaY > 0 ? -0.1 : 0.1;
-      handleZoom(delta);
+      handleZoomChange(zoomLevel + delta);
     },
-    [handleZoom]
+    [zoomLevel, handleZoomChange]
   );
 
-  const handleMouseDown = useCallback(
+  const handleDragStart = useCallback(
     (e: React.MouseEvent) => {
       if (zoomLevel > 1) {
         setIsDragging(true);
@@ -149,40 +138,42 @@ const HeroSection: React.FC<HeroSectionProps> = ({
     [zoomLevel, position]
   );
 
-  const handleMouseMove = useCallback(
+  const handleDragMove = useCallback(
     (e: React.MouseEvent) => {
-      if (isDragging && zoomLevel > 1) {
-        const newX = e.clientX - dragStart.x;
-        const newY = e.clientY - dragStart.y;
+      if (!isDragging || zoomLevel <= 1) return;
 
-        // Constrain panning to image boundaries
-        const maxPan = 100 * (zoomLevel - 1);
-        setPosition({
-          x: Math.max(-maxPan, Math.min(maxPan, newX)),
-          y: Math.max(-maxPan, Math.min(maxPan, newY)),
-        });
-      }
+      const newX = e.clientX - dragStart.x;
+      const newY = e.clientY - dragStart.y;
+
+      // Calculate boundaries based on image size and zoom
+      const image = imageRef.current;
+      if (!image) return;
+
+      const maxPanX = (image.offsetWidth * (zoomLevel - 1)) / 2;
+      const maxPanY = (image.offsetHeight * (zoomLevel - 1)) / 2;
+
+      setPosition({
+        x: Math.max(-maxPanX, Math.min(maxPanX, newX)),
+        y: Math.max(-maxPanY, Math.min(maxPanY, newY)),
+      });
     },
     [isDragging, zoomLevel, dragStart]
   );
 
-  const handleMouseUp = useCallback(() => {
+  const handleDragEnd = useCallback(() => {
     setIsDragging(false);
   }, []);
 
-  const resetZoom = useCallback(() => {
+  const resetZoomAndPan = useCallback(() => {
     setZoomLevel(1);
     setPosition({ x: 0, y: 0 });
   }, []);
 
+  // Slideshow lifecycle
   useEffect(() => {
-    if (!isPaused) startInterval();
-    return clearIntervalRef;
-  }, [startInterval, clearIntervalRef, isPaused]);
-
-  useEffect(() => {
-    AOS.init();
-  }, []);
+    if (!isPaused) startSlideshow();
+    return stopSlideshow;
+  }, [isPaused, startSlideshow, stopSlideshow]);
 
   return (
     <main className="w-full min-h-auto py-4 sm:py-8 md:py-12 lg:py-20 flex items-center justify-center">
@@ -214,7 +205,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({
             className="w-full lg:w-3/5 order-1 lg:order-2 relative overflow-hidden rounded-xl shadow-2xl group"
             onMouseEnter={() => setIsPaused(true)}
             onMouseLeave={() => setIsPaused(false)}
-            onKeyDown={handleKeyDown}
+            onKeyDown={handleKeyNavigation}
             tabIndex={0}
             role="region"
             aria-label="Image carousel"
@@ -225,10 +216,12 @@ const HeroSection: React.FC<HeroSectionProps> = ({
                   key={index}
                   src={image}
                   alt={`${imageAlt} ${index + 1}`}
-                  className={`absolute top-0 left-0 w-full h-full object-cover transition-opacity duration-700 cursor-pointer
-                  ${index === currentImageIndex ? "opacity-100" : "opacity-0"} 
-                  ${isTransitioning ? "transition-all duration-700" : ""}`}
-                  onClick={openModal}
+                  className={`absolute top-0 left-0 w-full h-full object-cover transition-opacity duration-300 ease-in-out cursor-pointer
+                    ${index === currentImageIndex ? "opacity-100" : "opacity-0"}
+                    ${
+                      isTransitioning ? "transition-opacity duration-300" : ""
+                    }`}
+                  onClick={openImageModal}
                   onError={(e) => (e.currentTarget.src = "/fallback-image.jpg")}
                   loading="lazy"
                 />
@@ -237,12 +230,12 @@ const HeroSection: React.FC<HeroSectionProps> = ({
 
             {/* Navigation buttons */}
             <button
-              onClick={goToPrevious}
-              className="absolute left-2 sm:left-4 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 hover:bg-opacity-70 text-white p-2 sm:p-3 rounded-full opacity-70 sm:opacity-50 group-hover:opacity-90 transition-opacity duration-300 z-10"
+              onClick={goToPreviousImage}
+              className="absolute left-4 top-1/2 -translate-y-1/2 bg-gray-900/60 hover:bg-gray-900/80 text-white p-3 rounded-full opacity-0 group-hover:opacity-100 transition-all duration-200"
               aria-label="Previous image"
             >
               <svg
-                className="w-4 h-4 sm:w-5 sm:h-5"
+                className="w-5 h-5"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -255,14 +248,13 @@ const HeroSection: React.FC<HeroSectionProps> = ({
                 />
               </svg>
             </button>
-
             <button
-              onClick={goToNext}
-              className="absolute right-2 sm:right-4 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 hover:bg-opacity-70 text-white p-2 sm:p-3 rounded-full opacity-70 sm:opacity-50 group-hover:opacity-90 transition-opacity duration-300 z-10"
+              onClick={goToNextImage}
+              className="absolute right-4 top-1/2 -translate-y-1/2 bg-gray-900/60 hover:bg-gray-900/80 text-white p-3 rounded-full opacity-0 group-hover:opacity-100 transition-all duration-200"
               aria-label="Next image"
             >
               <svg
-                className="w-4 h-4 sm:w-5 sm:h-5"
+                className="w-5 h-5"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -277,16 +269,15 @@ const HeroSection: React.FC<HeroSectionProps> = ({
             </button>
 
             {/* Navigation dots */}
-            <div className="absolute bottom-2 sm:bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2 sm:space-x-4 z-10">
+            <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex space-x-2">
               {images.map((_, index) => (
                 <button
                   key={index}
-                  onClick={() => goToImage(index)}
-                  className={`w-2 h-2 sm:w-3 sm:h-3 md:w-4 md:h-4 rounded-full transition-colors duration-300 
-                  ${
+                  onClick={() => goToSpecificImage(index)}
+                  className={`w-3 h-3 rounded-full transition-colors duration-200 ${
                     index === currentImageIndex
                       ? "bg-white"
-                      : "bg-white bg-opacity-50 hover:bg-opacity-80"
+                      : "bg-white/50 hover:bg-white/80"
                   }`}
                   aria-label={`Go to image ${index + 1}`}
                   aria-current={index === currentImageIndex ? "true" : "false"}
@@ -296,23 +287,28 @@ const HeroSection: React.FC<HeroSectionProps> = ({
           </div>
         </article>
 
-        {/* Full-screen modal with zoom */}
+        {/* Full-screen modal with enhanced zoom and pan */}
+        {/* Note: This is the core of the improved "click to see photo" feature, with smooth animations and modern UX controls */}
         {isModalOpen && (
           <div
-            className="fixed inset-0 bg-black bg-opacity-90 flex items-center justify-center z-50"
-            onWheel={handleWheel}
-            onMouseDown={handleMouseDown}
-            onMouseMove={handleMouseMove}
-            onMouseUp={handleMouseUp}
-            onMouseLeave={handleMouseUp}
+            className="fixed inset-0 bg-black/95 flex items-center justify-center z-50 transition-opacity duration-300"
+            onWheel={handleWheelZoom}
+            onMouseDown={handleDragStart}
+            onMouseMove={handleDragMove}
+            onMouseUp={handleDragEnd}
+            onMouseLeave={handleDragEnd}
           >
-            <div className="relative max-w-4xl w-full h-auto">
-              <div className="overflow-hidden">
+            <div
+              className={`relative max-w-5xl w-full h-auto transition-transform duration-300 ease-out ${
+                isModalOpen ? "scale-100 opacity-100" : "scale-95 opacity-0"
+              }`}
+            >
+              <div className="overflow-hidden rounded-lg">
                 <img
                   ref={imageRef}
                   src={images[currentImageIndex]}
                   alt={`${imageAlt} ${currentImageIndex + 1}`}
-                  className={`w-full h-auto max-h-[90vh] object-contain transition-transform duration-300 ease-out ${
+                  className={`w-full h-auto max-h-[85vh] object-contain transition-transform duration-200 ease-out ${
                     isDragging ? "cursor-grabbing" : "cursor-grab"
                   }`}
                   style={{
@@ -324,10 +320,39 @@ const HeroSection: React.FC<HeroSectionProps> = ({
               </div>
 
               {/* Zoom controls */}
-              <div className="absolute bottom-4 right-4 flex space-x-2">
+              <div className="absolute bottom-6 right-6 bg-gray-900/80 rounded-lg p-3 flex items-center space-x-3">
                 <button
-                  onClick={() => handleZoom(0.1)}
-                  className="bg-black bg-opacity-50 hover:bg-opacity-70 text-white p-2 rounded-full transition-all duration-200"
+                  onClick={() => handleZoomChange(zoomLevel - 0.1)}
+                  className="text-white p-2 hover:bg-gray-700/50 rounded-full transition-colors duration-200"
+                  aria-label="Zoom out"
+                >
+                  <svg
+                    className="w-5 h-5"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M20 12H4"
+                    />
+                  </svg>
+                </button>
+                <input
+                  type="range"
+                  min="1"
+                  max="4"
+                  step="0.1"
+                  value={zoomLevel}
+                  onChange={(e) => handleZoomChange(parseFloat(e.target.value))}
+                  className="w-24 h-2 bg-gray-700 rounded-lg appearance-none cursor-pointer"
+                  aria-label="Zoom level"
+                />
+                <button
+                  onClick={() => handleZoomChange(zoomLevel + 0.1)}
+                  className="text-white p-2 hover:bg-gray-700/50 rounded-full transition-colors duration-200"
                   aria-label="Zoom in"
                 >
                   <svg
@@ -345,27 +370,8 @@ const HeroSection: React.FC<HeroSectionProps> = ({
                   </svg>
                 </button>
                 <button
-                  onClick={() => handleZoom(-0.1)}
-                  className="bg-black bg-opacity-50 hover:bg-opacity-70 text-white p-2 rounded-full transition-all duration-200"
-                  aria-label="Zoom out"
-                >
-                  <svg
-                    className="w-5 h-5"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M20 12H4"
-                    />
-                  </svg>
-                </button>
-                <button
-                  onClick={resetZoom}
-                  className="bg-black bg-opacity-50 hover:bg-opacity-70 text-white p-2 rounded-full transition-all duration-200"
+                  onClick={resetZoomAndPan}
+                  className="text-white p-2 hover:bg-gray-700/50 rounded-full transition-colors duration-200"
                   aria-label="Reset zoom"
                 >
                   <svg
@@ -386,8 +392,8 @@ const HeroSection: React.FC<HeroSectionProps> = ({
 
               {/* Close button */}
               <button
-                onClick={closeModal}
-                className="absolute top-4 right-4 bg-black bg-opacity-50 hover:bg-opacity-70 text-white p-3 rounded-full transition-all duration-200"
+                onClick={closeImageModal}
+                className="absolute top-4 right-4 bg-gray-900/60 hover:bg-gray-900/80 text-white p-3 rounded-full transition-colors duration-200"
                 aria-label="Close modal"
               >
                 <svg
