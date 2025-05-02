@@ -91,17 +91,6 @@ const Letter: React.FC<{ letter: Letter }> = ({ letter }) => {
   );
 };
 
-// Section Component
-const Section: React.FC<{ title: string; children: React.ReactNode }> = ({
-  title,
-  children,
-}) => (
-  <section className="py-12 px-4 sm:px-6 lg:px-8">
-    <h2 className="text-3xl font-bold text-center mb-8">{title}</h2>
-    {children}
-  </section>
-);
-
 const Letters: React.FC = () => {
   const { theme } = useTheme();
 
