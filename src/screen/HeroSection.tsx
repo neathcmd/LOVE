@@ -5,6 +5,7 @@ import Image1 from "../assets/Dynamic-Image/Image1.jpg";
 import Image2 from "../assets/Dynamic-Image/Image2.jpg";
 import Image3 from "../assets/Dynamic-Image/Image3.jpg";
 import Image4 from "../assets/Dynamic-Image/Image4.jpg";
+import Image5 from "../assets/Dynamic-Image/Image5.jpg";
 
 interface HeroSectionProps {
   title?: string;
@@ -19,7 +20,7 @@ const defaultData: HeroSectionProps = {
   imageAlt: "A beautiful memory",
 };
 
-const images = [Image1, Image2, Image3, Image4];
+const images = [Image1, Image2, Image3, Image4, Image5];
 
 const HeroSection: React.FC<HeroSectionProps> = ({
   title = defaultData.title,

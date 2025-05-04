@@ -11,6 +11,7 @@ import {
 import LibaryTogether from "../assets/LibaryTogether.jpg";
 import Heart from "../assets/Heart.jpg";
 import DinnerTime from "../assets/Dinner.jpg";
+import Best from "../assets/Best.jpg";
 import { useTheme } from "../context/ThemeContext";
 
 const BestMoment: React.FC = () => {
@@ -37,11 +38,11 @@ const BestMoment: React.FC = () => {
       title: "Dinner Time Together",
     },
     {
-      src: "LibaryTogether",
-      alt: "Loading...",
-      date: "Loading...",
-      time: "Loading...",
-      title: "Coming Soon...",
+      src: Best,
+      alt: "At the Cafe",
+      date: "2025-05-03",
+      time: "1:31 PM",
+      title: "Rainy Day at the Cafe",
     },
   ];
 

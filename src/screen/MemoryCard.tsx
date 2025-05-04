@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import SecondDate from "../assets/FirstDate.jpg";
 import FirstDate from "../assets/SecondDate.jpg";
 import ThirtDate from "../assets/Thirt.jpg";
+import FourthDate from "../assets/FourthDate.jpg";
 import { useTheme } from "../context/ThemeContext";
 
 // Types
@@ -36,8 +37,17 @@ const memories: Memory[] = [
     id: "memory3",
     date: "2025-05-01",
     title: "At a cafe",
-    description: "A nice holiday with you at a coffee shop near out school.",
+    description: "A nice holiday with you at a coffee shop near our school.",
     image: ThirtDate,
+    tags: ["holiday"],
+  },
+  {
+    id: "memory4",
+    date: "2025-05-03",
+    title: "At the same coffee shop",
+    description:
+      "A nice holiday with you at our favorite coffee shop in a rainy day.",
+    image: FourthDate,
     tags: ["holiday"],
   },
 ];
