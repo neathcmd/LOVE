@@ -22,7 +22,7 @@ const DateCounter: React.FC<DateCounterProps> = ({
       imageUrl: Partner1,
     },
     {
-      name: "Son Reaksmey",
+      name: "Sun Reaksmey",
       imageUrl: Partner2,
     },
   ],
