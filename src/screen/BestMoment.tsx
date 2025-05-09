@@ -53,7 +53,6 @@ const BestMoment: React.FC = () => {
   const [modalOpen, setModalOpen] = useState(false);
   const [modalImageIndex, setModalImageIndex] = useState(0);
   const [isZoomed, setIsZoomed] = useState(false);
-
   const sliderRef = useRef<HTMLDivElement>(null);
   const modalRef = useRef<HTMLDivElement>(null);
   const { theme } = useTheme();

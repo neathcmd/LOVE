@@ -2,7 +2,14 @@ import React, { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router";
 import ThemeToggle from "../context/ThemeToggle";
 import { useTheme } from "../context/ThemeContext";
-import { Menu, X, Home, Calendar, MessageCircleMoreIcon } from "lucide-react";
+import {
+  Menu,
+  X,
+  Home,
+  Calendar,
+  MessageCircleMoreIcon,
+  Book,
+} from "lucide-react";
 
 // Interface for navigation item props with clearer naming
 interface NavigationItem {
@@ -56,6 +63,11 @@ const Header: React.FC<HeaderProps> = ({
       label: "Sent Messages",
       link: "/sent-messages",
       icon: <MessageCircleMoreIcon size={18} />,
+    },
+    {
+      label: "Our Stories",
+      link: "/stories",
+      icon: <Book size={18} />,
     },
   ];
 
