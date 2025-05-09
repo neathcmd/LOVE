@@ -6,6 +6,7 @@ import Partner2 from "../assets/Partner2.jpg";
 interface Partner {
   name: string;
   imageUrl?: string;
+  birthday: string;
 }
 
 interface DateCounterProps {
@@ -20,10 +21,12 @@ const DateCounter: React.FC<DateCounterProps> = ({
     {
       name: "Sal Monineath",
       imageUrl: Partner1,
+      birthday: "2007-07-11",
     },
     {
       name: "Son Reaksmey",
       imageUrl: Partner2,
+      birthday: "2006-01-18",
     },
   ],
   startDate = "2025-04-06",
@@ -126,18 +129,29 @@ const DateCounter: React.FC<DateCounterProps> = ({
                         className="w-full h-full object-cover"
                       />
                     ) : (
-                      <div
-                        className={`w-full h-full flex items-center justify-center text-4xl font-bold ${
-                          theme === "dark" ? "text-gray-500" : "text-gray-400"
-                        }`}
-                      >
-                        {partner.name
-                          .split(" ")
-                          .map((n) => n[0])
-                          .join("")}
-                      </div>
+                      <>
+                        <div
+                          className={`w-full h-full flex items-center justify-center text-4xl font-bold ${
+                            theme === "dark" ? "text-gray-500" : "text-gray-400"
+                          }`}
+                        >
+                          {partner.name
+                            .split(" ")
+                            .map((n) => n[0])
+                            .join("")}
+                        </div>
+                      </>
                     )}
                   </div>
+                  {/* Birthday displayed separately below the circle */}
+                  <div
+                    className={`mt-1 text-xs font-medium ${
+                      theme === "dark" ? "text-gray-400" : "text-gray-600"
+                    }`}
+                  >
+                    {partner.birthday}
+                  </div>
+
                   {editable && isEditing ? (
                     <input
                       type="text"
