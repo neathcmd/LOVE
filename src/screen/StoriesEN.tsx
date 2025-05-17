@@ -46,21 +46,24 @@ const StoriesEN = () => {
           <p className="text-lg leading-relaxed">The Day Everything Began:</p>
 
           <p className="text-lg leading-relaxed mt-4">
-            It was Saturday, February 15th a typical weekend, and the day we
-            opened the library, the same day we worked together as library
-            managers. That afternoon, as we were preparing to close the library,
-            only two people remained to tidy up before leaving: me and a girl
-            who was the assistant manager. She was responsible for overseeing
-            the library and the volunteers who worked there.
+            It was Saturday, February 15th a typical weekend at the school
+            library. The day was filled with laughter, funny jokes from all the
+            volunteers, and a joyful atmosphere that made everything feel light
+            and cheerful. It truly was a wonderful weekend. As closing time
+            approached, most of the volunteers had already left. Only two of us
+            stayed behind to tidy up the place me and a girl. She was kind,
+            helpful, and what stood out the most was how she liked to do
+            everything on her own, just like I used to be. We worked side by
+            side, finishing up the last tasks of the day. While we we tidy up
           </p>
 
           <p className="text-lg leading-relaxed mt-4">
-            She told me that the next day, Sunday, February 16th, 2025, there
-            would be a psychology class held in the library for the entire
-            morning. Because of that, we needed to open the library earlier than
-            usual unlike our typical schedule where we only opened on Saturdays.
-            She asked me to help her prepare. At first, I hesitated, but when
-            she explained that she’d be alone and needed someone else to help
+            She said that the next day, Sunday, February 16th, 2025, there would
+            be a psychology class held in the library for the entire morning.
+            Because of that, we needed to open the library earlier than usual
+            unlike our typical schedule where we only opened on Saturdays. She
+            asked me to help her prepare. At first, I hesitated, but when she
+            explained that she’d be alone and needed someone else to help
             oversee things, I agreed. I promised her I would come.
           </p>
 
@@ -98,7 +101,7 @@ const StoriesEN = () => {
             <span className="italic">"Would you be upset if I told you?"</span>{" "}
             I replied,{" "}
             <span className="italic">
-              "Not at all. You can tell me don’t worry."
+              "It's okay I don't mind You can tell me."
             </span>
           </p>
 
@@ -170,6 +173,16 @@ const StoriesEN = () => {
             moment, just before we went our separate ways...
           </p>
 
+          <p className="text-lg leading-relaxed mt-4">
+            From that moment, I found myself thinking about her all the time. I
+            didn’t know what this feeling was a strange mix of wanting and
+            missing. I wanted to see her face every day, to be close to her, but
+            we were like strangers. If I went a day without seeing her, I felt
+            empty inside. I kept asking myself, Am I in love? Her beautiful
+            smile, her joyful laughter stayed in my mind. But even with all
+            these feelings, I never found a clear answer.
+          </p>
+
           <div className="flex justify-center my-8">
             <div
               className={`h-px w-1/3 ${
@@ -179,7 +192,7 @@ const StoriesEN = () => {
           </div>
           <p className="text-lg leading-relaxed mt-4 italic">
             "From that moment, the connection between us started to grow. From
-            just strangers slowly became two hearts getting closer together.
+            just strangers slowly became two hearts getting closer together."
           </p>
         </div>
 
