@@ -3,6 +3,7 @@ import SecondDate from "../assets/FirstDate.jpg";
 import FirstDate from "../assets/SecondDate.jpg";
 import ThirtDate from "../assets/Thirt.jpg";
 import FourthDate from "../assets/FourthDate.jpg";
+import Library from "../assets/New.jpg";
 import { useTheme } from "../context/ThemeContext";
 
 // Types
@@ -49,6 +50,14 @@ const memories: Memory[] = [
       "A nice holiday with you at our favorite coffee shop in a rainy day.",
     image: FourthDate,
     tags: ["holiday"],
+  },
+  {
+    id: "memory5",
+    date: "2025-05-19",
+    title: "At the Library",
+    description: "A nice break time with you at the school library.",
+    image: Library,
+    tags: ["BreakTime"],
   },
 ];
 
