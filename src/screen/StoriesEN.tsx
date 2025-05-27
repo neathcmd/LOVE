@@ -68,9 +68,6 @@ const StoriesEN = () => {
 
   return (
     <div className="w-full">
-      <div className="w-full text-center">
-        <h1>Chapter ID</h1>
-      </div>
       <div className="container max-w-4xl mx-auto px-6 pb-24">
         <ChapterCard
           title="Chapter 1: The Day It All Began"
