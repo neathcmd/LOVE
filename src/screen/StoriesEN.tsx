@@ -277,51 +277,31 @@ const StoriesEN = () => {
                 walking into the library. She was usually already there—reading,
                 waiting, organizing something, or just sitting quietly. Between
                 11 and 1, those two hours slowly became a part of my daily life.
+                I joke with her, share my studies, and feel very happy when I
+                see her beautiful smile, laugh, and do small things together. I
+                feel happy in my life.
               </p>
               <p className="text-lg leading-relaxed mt-4">
-                Sometimes we talked, other times we didn’t need to. We’d sit
-                near each other in silence, and yet the air between us always
-                felt warm. Safe. and Familiar.
+                Sometimes we talked, We jokes, other times we didn’t need to.
+                We’d sit near each other in silence, and yet the air between us
+                always felt warm. Safe. and Familiar.
               </p>
 
               <p className="text-lg leading-relaxed mt-4">
-                One afternoon, while organizing some books on the shelf, she
-                laughed as I struggled arranging them. "Want help, tall guy?"
-                she teased.
-              </p>
-              <p className="text-lg leading-relaxed mt-4">
-                I smiled. and replied "Sure"
-              </p>
-              <p className="text-lg leading-relaxed mt-4">
-                Moments like those made the space feel lighter. Familiar. Safe.
-              </p>
-              <p className="text-lg leading-relaxed mt-4">
-                Then there were the quiet days — when we wouldn't joke as much,
-                but the silence between us still felt warm. I started noticing
-                the smallest details: the way she bit her lip when reading
-                something serious, how she brushed her hair back when focused,
-                how she glanced my way when she thought I wasn't looking.
-              </p>
-              <p className="text-lg leading-relaxed mt-4">
-                And yet, nothing was said aloud.
-              </p>
-              <p className="text-lg leading-relaxed mt-4">Not yet.</p>
-              <p className="text-lg leading-relaxed mt-4">
-                She had recently ended her relationship, and I knew she was
-                still healing. I didn't want to rush her. I just wanted to be
-                there — not to replace anyone, but to be someone who truly saw
-                her.
-              </p>
-              <p className="text-lg leading-relaxed mt-4">
-                Sometimes, the most important moments aren't the loudest.
-                They're the quiet hours we spend with someone, doing ordinary
-                things that slowly start to mean everything.
-              </p>
-              <p className="text-lg leading-relaxed mt-4">
                 The library wasn't special to most students. Just a room with
                 books and chairs. But to me, between those quiet hours of 11 to
-                1, it was where everything started to change. Not just between
-                us, but inside me too.
+                1, it was where everything started to change. just between us.
+              </p>
+
+              <p className="text-lg leading-relaxed mt-4">
+                For months I was just a friend to her. A friend who understand
+                everything, Who's know everything understanding her feeling
+                knowing her struggle. I'm just a friend who was there for her
+                when she needed someone to listen, to care, to be there. I never
+                thought of crossing that line, never thought of making it more
+                than just friendship. I was just being the person who she could
+                rely on, the one who understood her without needing to say much.
+                Untill...I corssed that line.
               </p>
             </>
           }
