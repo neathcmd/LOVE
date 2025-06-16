@@ -289,8 +289,8 @@ const StoriesEN = () => {
 
               <p className="text-lg leading-relaxed mt-4">
                 The library wasn't special to most students. Just a room with
-                books and chairs. But to me, between those quiet hours of 11 to
-                1, it was where everything started to change. just between us.
+                books and chairs. But to me, it was where I have met a wonderful
+                woman.
               </p>
 
               <p className="text-lg leading-relaxed mt-4">
@@ -306,60 +306,87 @@ const StoriesEN = () => {
             </>
           }
         />
-        {/* 
+
         <ChapterCard
           title="Chapter 3: We Were No Longer Just Friends"
-          date="March 24, 2025"
+          date="April 06 2025"
           content={
-            <>
-              <p className="text-lg leading-relaxed">
-                The Moment Everything Changed:
+            <div>
+              <p className="text-lg leading-relaxed">April 6, 2025</p>
+              <p className="text-lg leading-relaxed mt-4">
+                On April 6, 2025, We were both tired from a full week of
+                studying, so I asked her if she wanted to go to a café near our
+                school just to relax and take a break. She said "yes". That day
+                felt calm, like a small pause in our busy lives.
               </p>
               <p className="text-lg leading-relaxed mt-4">
-                It was during one of those quiet afternoons in the library when
-                something shifted between us. The air felt different that day,
-                charged with an unspoken understanding that had been building
-                for weeks. We were sitting across from each other, books open
-                but largely ignored, when she looked up and caught me watching
-                her.
+                Coincidentally, one of my old friends from high school was
+                visiting the city. I thought it might be fun to invite him to
+                join us hoping to lighten the mood. Then he came we were having
+                a great time together he get to know her, She get to know my
+                friend. It was a wonderful afternoon.
               </p>
               <p className="text-lg leading-relaxed mt-4">
-                "You've been staring," she said with a small smile, her cheeks
-                flushing pink.
+                Everything was going fine until her phone buzzed. She got a text
+                from her boyfriend. She looked at me and said “Can you help me
+                break up with him? I don’t feel like he's loves me anymore.”
               </p>
               <p className="text-lg leading-relaxed mt-4">
-                I felt my own face grow warm. "Sorry, I was just... thinking."
+                At first, I thought she was joking. I drafted a breakup message
+                but didn’t send it. And then I gave the phone back to her
+                thinking she will just laugh and delete it. But without any
+                hesitation, she took the phone and pressed send. Just like that.
+                I froze, shocked. But then I noticed tears slowly forming in her
+                eyes. That’s when I realized it wasn’t just a decision it was
+                something she had been holding in for a long time. I pet her
+                shoulder slowly. and told her, “It’s okay. If he doesn’t love
+                you, it's time to let him go.” She tried to keep it together,
+                but her eyes gave it away. I knew how that felt but I didn't say
+                anything.
               </p>
               <p className="text-lg leading-relaxed mt-4">
-                "About what?" she asked, closing her book and leaning forward
-                slightly.
+                Suddenly, she stood up and ran to the bathroom, slamming the
+                door behind her. I sat there with my friend, not knowing what to
+                do, assuming she just needed a moment alone. I didn’t realize
+                she was crying in there until she came out and told me herself.
+                Her eyes were red, but she tried to smile. I knew everything, I
+                knew she's hurt inside.
               </p>
               <p className="text-lg leading-relaxed mt-4">
-                The question hung in the air between us. This was the moment I
-                had been both dreading and hoping for. All those weeks of
-                careful friendship, of being there for her without crossing
-                lines, of pretending that my feelings weren't growing stronger
-                every day.
+                After a while, my friend left, and it was just the two of us. We
+                sat there for hours, not saying much, just sharing the moment.
+                Before we parted ways, I pet her head slowly and said, “It's
+                okay, be strong and if you ever need anything I'm here.”
               </p>
               <p className="text-lg leading-relaxed mt-4">
-                "About us," I said quietly. "About how I feel when I'm with
-                you."
+                I wasn’t sure how much she trusted me, but I knew in my heart,
+                I’d always be there for her.
               </p>
               <p className="text-lg leading-relaxed mt-4">
-                She was quiet for a long moment, her eyes searching my face.
-                Then, so softly I almost didn't hear it, she said, "I feel it
-                too."
+                That day changed everything.
               </p>
-              <p className="text-lg leading-relaxed mt-4">
-                Those four words changed everything.
-              </p>
-              <p className="text-lg leading-relaxed mt-4">
-                We talked for hours that day, finally putting words to the
-                feelings that had been building between us. She told me how she
-                had started looking forward to our library meetings, how my
-                presence had become the brightest part of her days. I shared how
-                thinking about her had become as natural as breathing, how her
-                smile had become my favorite sight in the world.
+              {/* <p className="text-lg leading-relaxed mt-4">
+                Later that day in the evening I was chatting with my girlfriend
+                over the phone, but I felt something off so I confront her I ask
+                "bebe you have been acting strange lately You have something
+                that you don't want tell me?" And then she start say thing like
+                "no bebe I'm find I'm okay...." but I'm not having it I knew
+                there was something wrong. I ask her mutipal time until she gave
+                up and tell me the truth, She said "don't be mad okay" I said
+                "of course" but deep down I knew there was something. and she
+                said "the truth I don't feel a connection anymore I'm back with
+                my ex I love him I can't live without hime", that words crush me
+                after everything I've done for her I lvoe her I trusted her I
+                gave all my love to her and she just crush it and walk away with
+                her ex jsut like that, after a painful converstion I desided
+                it's okay I'll let her go then that's it I just broke up with my
+                girlfriend the same day. after a moment I call the girl earlier
+                and I told her everything but something happened. actully she
+                also had feeling for me but she was afraid to tell me because
+                she think she will lose me, and I told her I also had feeling
+                for her, then we having a very long converstion for almost an
+                hour. from then on we're more then just a friend she mine and
+                I'm her's.
               </p>
               <p className="text-lg leading-relaxed mt-4">
                 "I was scared," she admitted. "After everything that happened
@@ -390,10 +417,10 @@ const StoriesEN = () => {
                 with whispered confessions in empty libraries, where the only
                 witnesses are books that have seen countless love stories unfold
                 between their pages.
-              </p>
-            </>
+              </p> */}
+            </div>
           }
-        /> */}
+        />
       </div>
     </div>
   );
