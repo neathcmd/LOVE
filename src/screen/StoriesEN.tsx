@@ -365,59 +365,58 @@ const StoriesEN = () => {
               <p className="text-lg leading-relaxed mt-4">
                 That day changed everything.
               </p>
-              {/* <p className="text-lg leading-relaxed mt-4">
-                Later that day in the evening I was chatting with my girlfriend
-                over the phone, but I felt something off so I confront her I ask
-                "bebe you have been acting strange lately You have something
-                that you don't want tell me?" And then she start say thing like
-                "no bebe I'm find I'm okay...." but I'm not having it I knew
-                there was something wrong. I ask her mutipal time until she gave
-                up and tell me the truth, She said "don't be mad okay" I said
-                "of course" but deep down I knew there was something. and she
-                said "the truth I don't feel a connection anymore I'm back with
-                my ex I love him I can't live without hime", that words crush me
-                after everything I've done for her I lvoe her I trusted her I
-                gave all my love to her and she just crush it and walk away with
-                her ex jsut like that, after a painful converstion I desided
-                it's okay I'll let her go then that's it I just broke up with my
-                girlfriend the same day. after a moment I call the girl earlier
-                and I told her everything but something happened. actully she
-                also had feeling for me but she was afraid to tell me because
-                she think she will lose me, and I told her I also had feeling
-                for her, then we having a very long converstion for almost an
-                hour. from then on we're more then just a friend she mine and
-                I'm her's.
+              <p className="text-lg leading-relaxed mt-4">
+                Later that evening, I was on the phone with my girlfriend. But
+                something felt off. Her voice, her words everything seemed
+                distant. So I asked her directly, “Bebe, you’ve been acting
+                strange lately… is there something you’re not telling me?”
               </p>
               <p className="text-lg leading-relaxed mt-4">
-                "I was scared," she admitted. "After everything that happened
-                before, I didn't want to trust these feelings again."
+                At first, she brushed it off. saying “No, bebe, I’m fine… I’m
+                okay.” But I knew she wasn’t. I asked her again and again until
+                she finally gave in and said, “Don’t be mad, okay?”
               </p>
               <p className="text-lg leading-relaxed mt-4">
-                "And now?" I asked.
+                Then came the words that shattered me: “The truth is… I don’t
+                feel a connection anymore. I’m back with my ex. I love him… I
+                can’t live without him.”
               </p>
               <p className="text-lg leading-relaxed mt-4">
-                She reached across the table and took my hand. "Now I think
-                maybe it's worth the risk."
+                In that moment, my whole world collapsed. After everything I had
+                done for her… after all the love, trust, and effort I gave her
+                And she walked away. Just like that. Back to someone who had
+                already let her down before.
               </p>
               <p className="text-lg leading-relaxed mt-4">
-                From that day forward, we were no longer just friends. We were
-                something new, something that belonged entirely to us. The
-                library remained our sanctuary, but now it held a different kind
-                of magic. It was where two hearts had finally found the courage
-                to beat in sync.
+                Then after a painful conversation I decided: it’s okay. If she
+                wants to go, I won’t stop her. I let her go. That same night… I
+                broke up with my girlfriend.
               </p>
               <p className="text-lg leading-relaxed mt-4">
-                We didn't need grand gestures or dramatic declarations. Our love
-                story was written in quiet moments, in shared glances, in the
-                comfortable silence of two people who had found their home in
-                each other.
+                A little later, I called the other girl the one who had been by
+                my side earlier that day. I told her everything. But then
+                something unexpected happened. She told me that she had feelings
+                for me too. She had kept them hidden all this time because she
+                was scared… scared that I wouldn't take her seriously.
               </p>
               <p className="text-lg leading-relaxed mt-4">
-                Sometimes the most beautiful beginnings are the ones that start
-                with whispered confessions in empty libraries, where the only
-                witnesses are books that have seen countless love stories unfold
-                between their pages.
-              </p> */}
+                I was quiet for a second and then I told her the truth: “I have
+                feelings for you too. I’ve had them for a while.” We talked for
+                almost an hour, sharing everything we had been holding back.
+                That conversation changed everything.
+              </p>
+              <p className="text-lg leading-relaxed mt-4">
+                Then from that day on, after long days filled with school and
+                homework, we had a little tradition standing on the balconies of
+                our buildings, facing each other. We’d talk on the phone,
+                sometimes for hours, while looking at each other from across the
+                distance. It was simple, but it meant everything. Even though we
+                were separated by just a few floors and a bit of space, it felt
+                like we were in our own quiet world. The sound of her voice, the
+                sight of her smile across the gap—it made all the stress of the
+                day disappear. In those small, peaceful moments, it didn’t
+                matter how far apart we were. We felt closer than ever.
+              </p>
             </div>
           }
         />

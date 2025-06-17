@@ -1,7 +1,6 @@
 import { useTheme } from "../context/ThemeContext";
 import { Heart } from "lucide-react";
 import StoriesEN from "../screen/StoriesEN";
-import StoriesKH from "../screen/StoriesKH";
 
 const OurStories = () => {
   const { theme } = useTheme();
@@ -66,9 +65,9 @@ const OurStories = () => {
         </p>
       </div>
       {/* StoriesKH */}
-      <div>
+      {/* <div>
         <StoriesKH />
-      </div>
+      </div> */}
     </div>
   );
 };
